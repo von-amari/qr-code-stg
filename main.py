@@ -41,6 +41,6 @@ def gen_ean13(content):
 #     img.save('qrcode001.png')
 #     return img
 
-if __name__ == '__main__':
-    app.run()
+
+app.run()
 
