@@ -6,22 +6,33 @@ import qrcode
 import barcode
 from io import BytesIO
 
+from flask import make_response, url_for, redirect
+from flask import request, render_template, flash
+r
+import barcode
+import qrcode
+
+
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/generate_qrcode', methods=['POST'])
-def gen_ean13(content):
-    try:
-        int(content)
-    except ValueError:
-        return None
-
+def gen_code39(content):
     fp = StringIO()
-    notext = barcode.writer.ImageWriter()
-    barcode.generate("EAN13", str(content), output=fp, writer=notext)
+    makepng = barcode.writer.ImageWriter()
+    barcode.generate("Code39", content, output=fp, writer=makepng)
     image = fp.getvalue()
     fp.close()
     return image
+
+
+@app.route('/generate_qrcode/<uuid>', methods=['POST'])
+def render_code39(uuid):
+    response = make_response(gen_code39(uuid))
+    response.headers["Content-type"] = "image/png"
+    return response
+
+
+
 # def generate_qrcode():
 #     buffer = BytesIO()
 #     data = request.form.get('data')
