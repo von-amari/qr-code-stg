@@ -17,9 +17,16 @@ def generate_qrcode():
     buffer.seek(0)
 
     response = send_file(buffer, mimetype = 'image/png')
-    return response
+    qr = qrcode.QRCode(
+        version=1,
+        box_size=10,
+        border=5)
+    qr.add_data(data)
+    qr.make(fit=True)
+    img = qr.make_image(fill='black', back_color='white')
+    img.save('qrcode001.png')
+    return img
 
 if __name__ == '__main__':
     app.run()
-
 
