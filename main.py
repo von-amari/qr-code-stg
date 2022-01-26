@@ -8,7 +8,7 @@ from io import BytesIO
 
 from flask import make_response, url_for, redirect
 from flask import request, render_template, flash
-r
+
 import barcode
 import qrcode
 
