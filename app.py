@@ -7,7 +7,7 @@ from io import BytesIO
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/generage_qrcode', methods=['POST'])
+@app.route('/generate_qrcode', methods=['POST'])
 def generate_qrcode():
     # Retrieve the name from url parameter
     buffer = BytesIO()
